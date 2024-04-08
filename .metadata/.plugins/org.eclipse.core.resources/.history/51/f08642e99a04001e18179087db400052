@@ -1,0 +1,7 @@
+/*
+ * dados dos arreglos AR Y RES, copiar en RES la sec de numeros iguales consecutivos(1,2,2) que más se repite en AR.
+ *   
+ */
+public class Ej_Parcial {
+
+}

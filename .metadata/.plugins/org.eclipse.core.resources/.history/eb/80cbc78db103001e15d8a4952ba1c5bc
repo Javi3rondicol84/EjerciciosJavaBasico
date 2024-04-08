@@ -1,0 +1,71 @@
+/*
+ *  en las secuencias de posicion impar, invertir las secuencias que no sean capicuba (que se lea igual de izq a der y de der a izq)
+ *  //secuencias impar, primer sec, tercer sec, quinta sec, septima sec...
+ *  las secuencias que son capicuba (2,2,2 o 2,5,2, etc), hay que rellenarlas con -1.
+ *  para las secuencias de posicion par(la segunda, cuarta, etc) si estan en ascendente hay que sumarle uno a cada valor.
+ *  si esta en orden descendente hay que restarle 1. si el valor es 1, no se lo restara o se le restará 2.
+ */	
+
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+public class PracticaParcial2023_2 {
+	
+	public static final int MAX = 14;
+	
+	public static void main(String [] args) {
+		int tmp = 0;
+		int inicio = 0;
+		int fin = -1;
+		int [] arr = {0,2,5,0,1,2,0,2,2,0,0,3,1,0};
+		int [] res = {0,5,2,0,2,3,0,-1,-1,0,0,2,0,0};
+		
+		while(inicio < MAX) {
+			
+			inicio = buscar_pos_inicio(arr, fin+1);
+			
+			if(inicio < MAX) {
+				fin = buscar_pos_fin(arr, inicio);
+					tmp++;
+					
+				if(tmp % 2 != 0) {
+					
+					if(es_capicuba(arr, inicio, fin) == true) {
+						volver_menos_uno(arr, inicio, fin);
+					}
+					else {
+						invertir(arr, inicio, fin);
+					}
+					
+				}
+				else if(tmp % 2 == 0) {
+					chequear_si_es_asc_desc(arr, inicio, fin);
+				}
+			}
+			
+		}
+	
+	}
+	
+	public static int buscar_pos_inicio(int [] arr, int inicio) {
+		
+		while((inicio < MAX) && (arr[inicio] == 0)) {
+			inicio++;
+		}
+		
+		return inicio;
+	}
+	
+	public static int buscar_pos_fin(int [] arr, int inicio) {
+		
+		while((inicio < MAX) && arr[inicio] != 0) {
+			inicio++;
+		}
+		
+		return inicio-1;
+	}
+	
+	
+	
+}

@@ -1,0 +1,34 @@
+/*
+ * Ejercicio tipo parcial
+Cuando se debe procesar texto expresado en lenguaje natural, una de las primeras tareas que se realiza es la de
+eliminación de stopwords. Las stopwords son palabras muy comunes en un determinado lenguaje, por ejemplo, artículos
+(el, la, las, los...), preposiciones (a, ante, con, por...), etc.
+Dado un texto almacenado en un arreglo de caracteres de tamaño MAX_A, donde cada palabra está delimitada por
+espacios, comas (,) o puntos (.) se pide eliminar todas las stopwords almacenadas en otro arreglo de caracteres de
+tamaño MAX_S que se encuentra delimitado por espacios.
+Por ejemplo, dado un texto almacenado en un arreglo A:
+ */
+
+public class PracticaParcial2023 {
+
+	public static void main (String [] args) {
+		
+		computar(2,4);
+		
+	}
+	
+	public static void computar(int x, int y) {
+		   boolean noTermina = true;
+		   while (noTermina) {
+			if (x % y == 0) {	
+			   noTermina = x <= y;
+			   x += y;
+			}
+			else {
+			   x++;
+			}
+			System.out.println(x);
+		}
+	}
+}
+

@@ -1,0 +1,7 @@
+/*
+ *  en las secuencias de posicion impar, invertir las secuencias que no sean capicuba (que se lea igual de izq a der y de der a izq)
+ * 
+ */
+public class PracticaParcial2023_2 {
+
+}

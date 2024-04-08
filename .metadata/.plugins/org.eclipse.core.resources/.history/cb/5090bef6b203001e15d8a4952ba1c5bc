@@ -1,0 +1,167 @@
+/*
+ *  en las secuencias de posicion impar, invertir las secuencias que no sean capicuba (que se lea igual de izq a der y de der a izq)
+ *  //secuencias impar, primer sec, tercer sec, quinta sec, septima sec...
+ *  las secuencias que son capicuba (2,2,2 o 2,5,2, etc), hay que rellenarlas con -1.
+ *  para las secuencias de posicion par(la segunda, cuarta, etc) si estan en ascendente hay que sumarle uno a cada valor.
+ *  si esta en orden descendente hay que restarle 1. si el valor es 1, no se lo restara o se le restará 2.
+ */	
+
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+public class PracticaParcial2023_2 {
+	
+	public static final int MAX = 14;
+	
+	public static void main(String [] args) {
+		int tmp = 0;
+		int inicio = 0;
+		int fin = -1;
+		int [] arr = {0,2,5,0,1,2,0,2,2,0,0,3,1,0};
+		int [] res = {0,5,2,0,2,3,0,-1,-1,0,0,2,0,0};
+		
+		while(inicio < MAX) {
+			
+			inicio = buscar_pos_inicio(arr, fin+1);
+			
+			if(inicio < MAX) {
+				fin = buscar_pos_fin(arr, inicio);
+					tmp++;
+					
+				if(tmp % 2 != 0) {
+					
+					if(es_capicuba(arr, inicio, fin) == true) {
+						volver_menos_uno(arr, inicio, fin);
+					}
+					else {
+						invertir(arr, inicio, fin);
+					}
+					
+				}
+				else if(tmp % 2 == 0) {
+					chequear_si_es_asc_desc(arr, inicio, fin);
+				}
+			}
+			
+		}
+	
+	}
+	
+	public static int buscar_pos_inicio(int [] arr, int inicio) {
+		
+		while((inicio < MAX) && (arr[inicio] == 0)) {
+			inicio++;
+		}
+		
+		return inicio;
+	}
+	
+	public static int buscar_pos_fin(int [] arr, int inicio) {
+		
+		while((inicio < MAX) && arr[inicio] != 0) {
+			inicio++;
+		}
+		
+		return inicio-1;
+	}
+	
+	public static boolean es_capicuba(int [] arr, int inicio, int fin) {
+		boolean es_capicuba = false;
+		int tam = (fin+1) - inicio;
+		int cont = tam/2;
+		int indice = 0;
+		
+		while((indice < cont) && (arr[inicio + indice]) == arr[fin - indice]) {
+			indice++;
+		}
+		
+		if(indice == cont) {
+			es_capicuba = true;
+		}
+		
+		return es_capicuba;
+	}
+	
+	public static void volver_menos_uno(int [] arr, int inicio, int fin) {
+		final int menos = -1;
+		
+		while(inicio <= fin) {
+			arr[inicio] = menos;
+			inicio++;
+		}
+		
+	}
+	
+	public static void invertir(int [] arr, int inicio, int fin) {
+		int tam = (fin+1) - inicio;
+		int aux;
+		int indice = 0;
+		
+		while(indice < (tam/2)) {
+			aux = arr[inicio+indice];
+			arr[inicio+indice] = arr[fin-indice];
+			arr[fin-indice] = aux;
+			indice++;
+		}
+	
+	}
+	
+	public static void chequear_si_es_asc_desc(int [] arr, int inicio, int fin) {
+		
+		if(es_asc(arr,inicio, fin) == true) {
+			sumar_uno(arr, inicio, fin);
+		}
+		else if(es_desc(arr, inicio, fin) == true) {
+			restar_uno(arr, inicio, fin);
+		}
+		
+	}
+	
+	public static boolean es_asc(int [] arr, int inicio, int fin) {
+		boolean es_asc = false;
+		
+		while((inicio < fin) && (arr[inicio] < arr[inicio+1])) {
+			inicio++;
+		}
+		
+		if(inicio == fin) {
+			es_asc = true;
+		}
+		
+		return es_asc;
+	}
+	
+	public static void sumar_uno(int [] arr, int inicio, int fin) {
+		while(inicio <= fin) {
+			arr[inicio]++;
+			inicio++;
+		}
+	}
+	
+	public static boolean es_desc(int [] arr, int inicio, int fin) {
+		
+		boolean es_desc = false;
+		
+		while((inicio < fin) && (arr[inicio] > arr[inicio+1])) {
+			inicio++;
+		}
+		
+		
+		return es_desc;
+	}
+	
+	public static void restar_uno(int [] arr, int inicio, int fin) {
+		
+		while(inicio <= fin) {
+			if(arr[inicio] > 1) {
+				arr[inicio]--;
+			}
+			inicio++;
+		}
+	}
+
+	
+
+
+}

@@ -1,0 +1,78 @@
+/*
+ * 10. Hacer un programa que dado un arreglo de enteros de tamaño
+10 que se encuentra precargado, solicite al usuario un número
+entero y elimine la primera ocurrencia del número (un número
+igual) en el arreglo (si existe). Para ello tendrá que buscar la
+posición y si está, realizar un corrimiento a izquierda (queda una
+copia de la última posición del arreglo en la anteúltima posición).
+
+ */
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.Random;
+
+public class Tp05_Ej10 {
+
+	public static int MAX = 10;
+	public static int MAXVALOR = 9;
+	public static int MINVALOR = 1;
+	
+	public static void main (String [] args) {
+		
+		int [] arr = new int[MAX];
+		int num;
+		
+		BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+		
+		try {
+			
+			System.out.println("Introduzca un numero, si se encuentra se elimina");
+			num = Integer.valueOf(entrada.readLine());
+			
+			cargar_arreglo(arr);
+			
+			imprimir_arreglo(arr);
+			
+			
+		
+		}
+		catch(Exception exc) {
+			
+		}
+		
+	}
+	
+	public static void cargar_arreglo(int [] arr) {
+		
+		Random r = new Random();
+		int indice;
+		indice = 0;
+		
+		while(indice < MAX) {
+			
+			arr[indice] = (r.nextInt(MAXVALOR-MINVALOR+1)+MINVALOR);
+			
+			indice++;
+		}
+		
+	}
+	
+	public static void imprimir_arreglo(int [] arr) {
+		
+		int indice;
+		indice = 0;
+		
+		System.out.println("Arreglo: ");
+		while(indice < MAX) {
+			
+			System.out.print("["+arr[indice]+"]");
+			
+			indice++;
+		}
+		
+		
+	}
+	
+	
+}
